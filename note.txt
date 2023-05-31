@@ -1,0 +1,8 @@
+1. lecture
+  youtube: https://youtu.be/ZSVnIphlGKI
+
+2. flutter create app-name
+
+3. firebase configure
+  $ flutterfire configure
+  ref: https://codewithandrea.com/articles/flutter-firebase-flutterfire-cli/ 

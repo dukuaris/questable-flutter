@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "65682280200",
+    "project_id": "questable-data-60074",
+    "storage_bucket": "questable-data-60074.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:65682280200:android:858c001f25a74923fb26bd",
+        "android_client_info": {
+          "package_name": "com.example.questable_quiz_flutter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "65682280200-5hgd14a047lss7bt94hlj3c89tim2c2p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAAjU0-CEohX0Hb41P3rNLiptJlQiCj2yY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "65682280200-5hgd14a047lss7bt94hlj3c89tim2c2p.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
