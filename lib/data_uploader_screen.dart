@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'controllers/question_group/question_paper/data_uploader.dart';
+import 'controllers/question_group/data_uploader.dart';
 import 'package:get/get.dart';
 
 import 'firebase_ref/loading_status.dart';

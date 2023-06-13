@@ -3,10 +3,12 @@ import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:logger/logger.dart';
 import 'package:questable_quiz_flutter/firebase_ref/references.dart';
+import 'package:questable_quiz_flutter/screens/home/home_screen.dart';
+import 'package:questable_quiz_flutter/screens/login/login_screen.dart';
 import 'package:questable_quiz_flutter/widgets/dialogs/dialog_widget.dart';
 
 class AuthController extends GetxController {
-  get AppLogger => Logger();
+  var AppLogger = Logger();
 
   @override
   void onReady() {
@@ -28,7 +30,7 @@ class AuthController extends GetxController {
     navigateToIntroduction();
   }
 
-  singInWithGoogle() async {
+  signInWithGoogle() async {
     final GoogleSignIn _googleSignIn = GoogleSignIn();
     try {
       GoogleSignInAccount? account = await _googleSignIn.signIn();
@@ -41,10 +43,16 @@ class AuthController extends GetxController {
 
         await _auth.signInWithCredential(_credential);
         await saveUser(account);
+        navigateToHomePage();
       }
     } on Exception catch (err) {
       AppLogger.e(err);
     }
+  }
+
+  User? getUser() {
+    _user.value = _auth.currentUser;
+    return _user.value;
   }
 
   saveUser(GoogleSignInAccount account) {
@@ -55,17 +63,39 @@ class AuthController extends GetxController {
     });
   }
 
+  Future<void> signOut() async {
+    AppLogger.d('signOut');
+    try {
+      await _auth.signOut();
+      navigateToHomePage();
+    } on FirebaseAuthException catch (err) {
+      AppLogger.e(err);
+    }
+  }
+
   void navigateToIntroduction() {
     Get.offAllNamed('/introduction');
+  }
+
+  void navigateToHomePage() {
+    Get.offAllNamed(HomeScreen.routeName);
   }
 
   void showLoginAlertDialogue() {
     Get.dialog(
       Dialogs.questionStartDailogue(onTap: () {
         Get.back();
-        //NavigatetoLoginPage
+        NavigatetoLoginPage();
       }),
       barrierDismissible: false,
     );
+  }
+
+  void NavigatetoLoginPage() {
+    Get.toNamed(LoginScreen.routeName);
+  }
+
+  bool isLoggedIn() {
+    return _auth.currentUser != null;
   }
 }

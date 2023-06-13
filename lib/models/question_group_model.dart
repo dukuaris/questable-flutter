@@ -111,7 +111,7 @@ class MultipleChoice {
 
   MultipleChoice.fromJson(Map<String, dynamic> json)
       : category = json['category'],
-        createdAt = json['createdAt'],
+        createdAt = (json['createdAt'] as Timestamp).toDate().toString(),
         difficulty = json['difficulty'],
         question = json['question'],
         correctAnswer = json['correct_answer'],
@@ -121,9 +121,26 @@ class MultipleChoice {
         incorrectAnswers = json['incorrect_answers'].cast<String>(),
         subject = json['subject'],
         play = json['play'],
-        updatedAt = json['updatedAt'],
+        updatedAt = (json['updatedAt'] as Timestamp).toDate().toString(),
         type = json['type'],
         id = json['id'];
+
+  MultipleChoice.fromSnapshot(
+      QueryDocumentSnapshot<Map<String, dynamic>> snapshot)
+      : category = snapshot['category'],
+        difficulty = snapshot['difficulty'],
+        question = snapshot['question'],
+        correctAnswer = snapshot['correctAnswer'],
+        questionGroup = snapshot['questionGroup'].cast<String>(),
+        userId = snapshot['userId'],
+        score = snapshot['score'],
+        incorrectAnswers = snapshot['incorrectAnswers'].cast<String>(),
+        subject = snapshot['subject'],
+        play = snapshot['play'],
+        createdAt = (snapshot['createdAt'] as Timestamp).toDate().toString(),
+        updatedAt = (snapshot['updatedAt'] as Timestamp).toDate().toString(),
+        type = snapshot['type'],
+        id = snapshot.id;
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();

@@ -9,7 +9,7 @@ import 'package:questable_quiz_flutter/configs/themes/app_colors.dart';
 import 'package:questable_quiz_flutter/configs/themes/app_icons.dart';
 import 'package:questable_quiz_flutter/configs/themes/custom_text_styles.dart';
 import 'package:questable_quiz_flutter/configs/themes/ui_parameters.dart';
-import 'package:questable_quiz_flutter/controllers/question_group/question_paper/question_group_controller.dart';
+import 'package:questable_quiz_flutter/controllers/question_group/question_group_controller.dart';
 import 'package:questable_quiz_flutter/controllers/zoom_drawer_controller.dart';
 import 'package:questable_quiz_flutter/screens/home/menu_screen.dart';
 import 'package:questable_quiz_flutter/screens/home/question_card.dart';
@@ -18,6 +18,8 @@ import 'package:questable_quiz_flutter/widgets/content_area.dart';
 
 class HomeScreen extends GetView<MyZoomDrawerController> {
   const HomeScreen({super.key});
+
+  static const String routeName = '/home';
 
   @override
   Widget build(BuildContext context) {

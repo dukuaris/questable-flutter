@@ -1,12 +1,17 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
+import 'package:logger/logger.dart';
+import 'package:questable_quiz_flutter/controllers/auth_controller.dart';
 import 'package:questable_quiz_flutter/firebase_ref/references.dart';
 import 'package:questable_quiz_flutter/models/question_group_model.dart';
 import 'package:questable_quiz_flutter/services/firebase_storage_service.dart';
+import 'package:questable_quiz_flutter/screens/question/questions_screen.dart';
 
 class QuestionGroupController extends GetxController {
   final allGroupImages = <String>[].obs;
   final allGroups = <QuestionGroupModel>[].obs;
+
+  var AppLogger = Logger();
 
   @override
   void onReady() {
@@ -40,7 +45,25 @@ class QuestionGroupController extends GetxController {
       }
       allGroups.assignAll(groupList);
     } catch (e) {
-      print("Controller Error!" + e.toString());
+      AppLogger.e(e);
+    }
+  }
+
+  void navigateToQuestions({
+    required QuestionGroupModel group,
+    bool tryAgain = false,
+  }) {
+    AuthController _authController = Get.find();
+    if (_authController.isLoggedIn()) {
+      if (tryAgain) {
+        Get.back();
+        //Get.offNamed();
+      } else {
+        Get.toNamed(QuestionsScreen.routeName, arguments: group);
+      }
+    } else {
+      print('The subject is ${group.subject}');
+      _authController.showLoginAlertDialogue();
     }
   }
 }
