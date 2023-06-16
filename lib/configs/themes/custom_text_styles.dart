@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:questable_quiz_flutter/configs/themes/app_colors.dart';
 import 'package:questable_quiz_flutter/configs/themes/ui_parameters.dart';
 
@@ -22,3 +23,14 @@ const headerText = TextStyle(
   fontWeight: FontWeight.w700,
   color: onSurfaceTextColor,
 );
+const appBarTS = TextStyle(
+  fontWeight: FontWeight.bold,
+  fontSize: 16,
+  color: onSurfaceTextColor,
+);
+TextStyle countDownTimerTS() => TextStyle(
+      letterSpacing: 2,
+      color: UIParameters.isDarkMode()
+          ? Theme.of(Get.context!).textTheme.bodyLarge!.color
+          : Theme.of(Get.context!).primaryColor,
+    );

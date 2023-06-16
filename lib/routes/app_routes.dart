@@ -5,6 +5,7 @@ import 'package:questable_quiz_flutter/screens/home/home_screen.dart';
 import 'package:questable_quiz_flutter/screens/login/login_screen.dart';
 import 'package:questable_quiz_flutter/screens/question/questions_screen.dart';
 import 'package:questable_quiz_flutter/controllers/question_group/questions_controller.dart';
+import 'package:questable_quiz_flutter/screens/question/test_overview_screen.dart';
 
 import '../screens/introduction/introduction.dart';
 import '../screens/splash/splash_screen.dart';
@@ -36,8 +37,12 @@ class AppRoutes {
           name: QuestionsScreen.routeName,
           page: () => QuestionsScreen(),
           binding: BindingsBuilder(() {
-            Get.put(QuestionsController());
+            Get.put<QuestionsController>(QuestionsController());
           }),
+        ),
+        GetPage(
+          name: TestOverviewScreen.routeName,
+          page: () => TestOverviewScreen(),
         )
       ];
 }

@@ -11,7 +11,7 @@ class QuestionGroupModel {
   String source;
   int? unit;
   int? score;
-  int? timeSeconds;
+  int timeSeconds;
   String? id;
 
   QuestionGroupModel(
@@ -25,7 +25,7 @@ class QuestionGroupModel {
       required this.source,
       this.unit,
       this.score,
-      this.timeSeconds,
+      required this.timeSeconds,
       this.id});
 
   QuestionGroupModel.fromJson(Map<String, dynamic> json)
@@ -92,22 +92,27 @@ class MultipleChoice {
   String? updatedAt;
   String type;
   String? id;
+  String? selectedAnswer;
+  List<String> answers = [];
 
-  MultipleChoice(
-      {this.category,
-      this.createdAt,
-      this.difficulty,
-      required this.question,
-      required this.correctAnswer,
-      this.questionGroup,
-      required this.userId,
-      this.score,
-      required this.incorrectAnswers,
-      this.subject,
-      this.play,
-      this.updatedAt,
-      required this.type,
-      this.id});
+  MultipleChoice({
+    this.category,
+    this.createdAt,
+    this.difficulty,
+    required this.question,
+    required this.correctAnswer,
+    this.questionGroup,
+    required this.userId,
+    this.score,
+    required this.incorrectAnswers,
+    this.subject,
+    this.play,
+    this.updatedAt,
+    required this.type,
+    this.id,
+    this.selectedAnswer,
+    required this.answers,
+  });
 
   MultipleChoice.fromJson(Map<String, dynamic> json)
       : category = json['category'],
@@ -140,7 +145,11 @@ class MultipleChoice {
         createdAt = (snapshot['createdAt'] as Timestamp).toDate().toString(),
         updatedAt = (snapshot['updatedAt'] as Timestamp).toDate().toString(),
         type = snapshot['type'],
-        id = snapshot.id;
+        id = snapshot.id,
+        answers = [
+          snapshot['correctAnswer'],
+          ...snapshot['incorrectAnswers'].cast<String>()
+        ]..shuffle();
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
