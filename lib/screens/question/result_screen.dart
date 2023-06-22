@@ -124,7 +124,7 @@ class ResultScreen extends GetView<QuestionsController> {
                     Expanded(
                       child: MainButton(
                         onTap: () {
-                          // controller.saveTestResults();
+                          controller.saveTestResults();
                         },
                         title: 'Go Home',
                       ),

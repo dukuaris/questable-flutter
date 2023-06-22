@@ -57,7 +57,8 @@ class QuestionGroupController extends GetxController {
     if (_authController.isLoggedIn()) {
       if (tryAgain) {
         Get.back();
-        //Get.offNamed();
+        Get.toNamed(QuestionsScreen.routeName,
+            arguments: group, preventDuplicates: false);
       } else {
         Get.toNamed(QuestionsScreen.routeName, arguments: group);
       }

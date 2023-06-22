@@ -22,15 +22,24 @@ extension QuestionsControllerExtension on QuestionsController {
     return points.toStringAsFixed(2);
   }
 
-  //   Future<void> saveTestResults() {
-  //   var batch = fireStore.batch();
-  //   User? _user = Get.find<AuthController>().getUser();
-  //   if (_user == null) {
-  //     return;
-  //   }
-  //   batch.set(userRef.doc(_user.email).collection('myrecent_tests').doc(questionGroupModel.id),{
-
-  //   }
-  //       );
-  // }
+  Future<void> saveTestResults() async {
+    var batch = fireStore.batch();
+    User? _user = Get.find<AuthController>().getUser();
+    if (_user == null) {
+      return;
+    }
+    batch.set(
+        userRef
+            .doc(_user.email)
+            .collection('myrecent_tests')
+            .doc(questionGroupModel.id),
+        {
+          'points': points,
+          'correctAnsweredQuestions': correctAnsweredQuestions,
+          'questionGroupModelId': questionGroupModel.id,
+          'time': questionGroupModel.timeSeconds - remainSeconds,
+        });
+    batch.commit();
+    navigateToHome();
+  }
 }

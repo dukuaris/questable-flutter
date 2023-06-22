@@ -9,6 +9,7 @@ import 'package:questable_quiz_flutter/controllers/question_group/question_group
 import 'package:questable_quiz_flutter/firebase_ref/loading_status.dart';
 import 'package:questable_quiz_flutter/models/question_group_model.dart';
 import 'package:questable_quiz_flutter/firebase_ref/references.dart';
+import 'package:questable_quiz_flutter/screens/home/home_screen.dart';
 import 'package:questable_quiz_flutter/screens/question/result_screen.dart';
 
 class QuestionsController extends GetxController {
@@ -65,7 +66,7 @@ class QuestionsController extends GetxController {
 
   void selectedAnswer(String? answer) {
     currentQuestion.value!.selectedAnswer = answer;
-    update(['answers_list']);
+    update(['answers_list', 'answer_review)list']);
   }
 
   String get completedTest {
@@ -119,5 +120,10 @@ class QuestionsController extends GetxController {
   void tryAgain() {
     Get.find<QuestionGroupController>()
         .navigateToQuestions(group: questionGroupModel, tryAgain: true);
+  }
+
+  void navigateToHome() {
+    _timer!.cancel();
+    Get.offNamedUntil(HomeScreen.routeName, (route) => false);
   }
 }
